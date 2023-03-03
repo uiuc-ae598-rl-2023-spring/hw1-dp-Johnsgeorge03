@@ -23,9 +23,9 @@ def plot_q_vs_episodes(Q_list, algo_name, x_label , y_label, title, color):
     plt.show()
     
 
-def plot_val_q_vs_episodes(Q_list, value, val_name):
+def plot_val_q_vs_episodes(Q_list, value, val_name, ax):
     eps = np.arange(len(Q_list)) + 1
-    plt.plot(eps, Q_list, label = val_name + "{}".format(value))
+    ax.plot(eps, Q_list, label = val_name + "{}".format(value))
     
     
 def plot_trajectory(env, policy):
