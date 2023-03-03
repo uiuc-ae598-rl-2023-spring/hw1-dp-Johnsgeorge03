@@ -130,10 +130,11 @@ def TD0(env, policy, alpha, gamma, total_episodes):
     return V
 
 
-def SARSA(env, total_episodes, epsilon, decay, alpha, gamma, Q_list):
+def SARSA(env, total_episodes, epsilon, decay, alpha, gamma, Q_list, G_list):
     Q = np.zeros((env.num_states, env.num_actions))
     for eps in range(total_episodes):
         s       = env.reset()
+        G       = 0
         if decay:
             epsilon = 1
         t       = 0
@@ -142,7 +143,7 @@ def SARSA(env, total_episodes, epsilon, decay, alpha, gamma, Q_list):
             if decay:
                 epsilon = 1/(t+1)
             s1, reward, done = env.step(a)
- 
+            G  += (gamma**t) * reward
             #Choosing the next action
             a1 = epsilon_greedy(env, Q, s1, epsilon)
              
@@ -157,16 +158,18 @@ def SARSA(env, total_episodes, epsilon, decay, alpha, gamma, Q_list):
              
             if done:
                 break
+        G_list.append(G)
         Q_list.append(np.mean(np.max(Q, axis = 1)))  
-    return Q, Q_list
+    return Q, Q_list, G_list
     
 
 
 
-def Q_learning(env, total_episodes, epsilon, decay, alpha, gamma, Q_list):
+def Q_learning(env, total_episodes, epsilon, decay, alpha, gamma, Q_list, G_list):
     Q = np.zeros((env.num_states, env.num_actions))
     for eps in range(total_episodes):
         s       = env.reset()
+        G       = 0
         if decay:
             epsilon = 1
         t       = 0
@@ -176,7 +179,7 @@ def Q_learning(env, total_episodes, epsilon, decay, alpha, gamma, Q_list):
                 epsilon = 1/(t+1)
             a       = epsilon_greedy(env, Q, s, epsilon)
             s1, reward, done = env.step(a)
- 
+            G += (gamma**t) * reward
             #Learning the Q-value
             target  = reward + gamma * np.max(Q[s1, :])
             Q[s, a] = Q[s, a] + alpha * (target - Q[s, a])
@@ -187,5 +190,6 @@ def Q_learning(env, total_episodes, epsilon, decay, alpha, gamma, Q_list):
              
             if done:
                 break
+        G_list.append(G)
         Q_list.append(np.mean(np.max(Q, axis = 1)))
-    return Q, Q_list
+    return Q, Q_list, G_list
