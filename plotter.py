@@ -11,7 +11,7 @@ import numpy as np
 import algorithms
 
 
-def plot_q_vs_episodes(Q_list, algo_name, x_label , y_label, title, color):
+def plot_q_vs_episodes(Q_list, algo_name, x_label , y_label, title, color, filepath):
     eps = np.arange(len(Q_list)) + 1
     plt.figure(figsize=(10, 8))
     plt.plot(eps, Q_list, color, label = algo_name)
@@ -20,6 +20,7 @@ def plot_q_vs_episodes(Q_list, algo_name, x_label , y_label, title, color):
     plt.title(title, fontsize = 20)
     plt.grid()
     plt.legend()
+    plt.savefig(filepath, dpi = 100)
     plt.show()
     
 
