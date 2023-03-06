@@ -30,18 +30,18 @@ V_star_pi, P_star_pi = algorithms.policy_iteration(env, gamma, tol, max_iter, Vl
 
 # Learning curve plot
 filepath = "figures/gridworld/pi_avg_state_value.png"
-plotter.plot_q_vs_episodes(Vl_pi, "Policy_iteration", "No. of episodes", \
+plotter.plot_q_vs_episodes(Vl_pi, "Policy_iteration", "No. of iterations", \
                            "Average $V(s)$", "Gridworld, Policy Iteration, " + title, \
                            'r', filepath)
 
 # Optimum state value function plot
 filepath = "figures/gridworld/pi_opt_state_value.png"
-plotter.plot_q_vs_episodes(V_star_pi, "Policy_iteration", "State, s", r"$V(s)$", \
+plotter.plot_q_vs_episodes(V_star_pi, "Policy_iteration", "State, s", r"$V^{*}(s)$", \
                            r"Gridworld, $V^{*}(s)$, " + title, 'r', filepath)
 
 # Optimum policy plot
 filepath = "figures/gridworld/pi_opt_policy.png"
-plotter.plot_q_vs_episodes(P_star_pi, "Policy_iteration", "State, s", "$\pi(s)$", \
+plotter.plot_q_vs_episodes(P_star_pi, "Policy_iteration", "State, s", "$\pi^{*}(s)$", \
                            r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
 
 
@@ -65,17 +65,17 @@ V_star_vi, P_star_vi = algorithms.value_iteration(env, gamma, tol, max_iter, Vl_
 
 # Learning curve plot
 filepath = "figures/gridworld/vi_state_value.png"
-plotter.plot_q_vs_episodes(Vl_vi, "Value_iteration", "No. of episodes", "Average $V(s)$", \
+plotter.plot_q_vs_episodes(Vl_vi, "Value_iteration", "No. of iterations", "Average $V(s)$", \
                            "Gridworld, Value Iteration, " + title, 'r', filepath)
 
 # Optimum state value function plot
 filepath = "figures/gridworld/vi_opt_state_value.png"
-plotter.plot_q_vs_episodes(V_star_vi, "Value_iteration", "State, s", r"$V(s)$", \
+plotter.plot_q_vs_episodes(V_star_vi, "Value_iteration", "State, s", r"$V^{*}(s)$", \
                            r"Gridworld, $V^{*}(s)$, " + title, 'r', filepath)
 
 # Optimum policy plot
 filepath = "figures/gridworld/vi_opt_policy.png"
-plotter.plot_q_vs_episodes(P_star_vi, "Value_iteration", "State, s", "$\pi(s)$", \
+plotter.plot_q_vs_episodes(P_star_vi, "Value_iteration", "State, s", "$\pi^{*}(s)$", \
                            r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
 
 # Plot policy and trajectory
@@ -130,11 +130,11 @@ plotter.plot_q_vs_episodes(Gl_sarsa, "SARSA", "No. of episodes", "Returns $G$", 
 
 # State value function plot
 filepath = "figures/gridworld/SARSA_state_value.png"
-plotter.plot_q_vs_episodes(V_sarsa, "SARSA", "State, s", r"$V(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r', filepath)
+plotter.plot_q_vs_episodes(V_sarsa, "SARSA", "State, s", r"$V^{*}(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r', filepath)
 
 # Policy plot
 filepath = "figures/gridworld/SARSA_policy.png"
-plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
+plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi^{*}(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
 
 
 
@@ -230,11 +230,11 @@ plotter.plot_q_vs_episodes(Gl_qlearn, "Q-learning", "No. of episodes", "Returns 
 
 # State value function plot
 filepath = "figures/gridworld/ql_state_value.png"
-plotter.plot_q_vs_episodes(V_qlearn, "Q-learning", "State, s", r"$V(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r', filepath)
+plotter.plot_q_vs_episodes(V_qlearn, "Q-learning", "State, s", r"$V^{*}(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r', filepath)
 
 # Policy plot
 filepath = "figures/gridworld/ql_policy.png"
-plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
+plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi^{*}(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
 
 
 # Plot policy and trajectory
