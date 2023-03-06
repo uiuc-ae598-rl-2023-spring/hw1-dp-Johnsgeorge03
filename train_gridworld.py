@@ -29,9 +29,20 @@ Vl_pi    = []
 V_star_pi, P_star_pi = algorithms.policy_iteration(env, gamma, tol, max_iter, Vl_pi)
 
 # Learning curve plot
+filepath = "figures/gridworld/pi_avg_state_value.png"
 plotter.plot_q_vs_episodes(Vl_pi, "Policy_iteration", "No. of episodes", \
-                           "Average $V(s)$", "Gridworld, Policy Iteration, " + title, 'r')
+                           "Average $V(s)$", "Gridworld, Policy Iteration, " + title, \
+                           'r', filepath)
 
+# Optimum state value function plot
+filepath = "figures/gridworld/pi_opt_state_value.png"
+plotter.plot_q_vs_episodes(V_star_pi, "Policy_iteration", "State, s", r"$V(s)$", \
+                           r"Gridworld, $V^{*}(s)$, " + title, 'r', filepath)
+
+# Optimum policy plot
+filepath = "figures/gridworld/pi_opt_policy.png"
+plotter.plot_q_vs_episodes(P_star_pi, "Policy_iteration", "State, s", "$\pi(s)$", \
+                           r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
 
 
 # Plot policy and trajectory
@@ -53,8 +64,19 @@ Vl_vi  = []
 V_star_vi, P_star_vi = algorithms.value_iteration(env, gamma, tol, max_iter, Vl_vi)
 
 # Learning curve plot
+filepath = "figures/gridworld/vi_state_value.png"
 plotter.plot_q_vs_episodes(Vl_vi, "Value_iteration", "No. of episodes", "Average $V(s)$", \
-                           "Gridworld, Value Iteration, " + title, 'r')
+                           "Gridworld, Value Iteration, " + title, 'r', filepath)
+
+# Optimum state value function plot
+filepath = "figures/gridworld/vi_opt_state_value.png"
+plotter.plot_q_vs_episodes(V_star_vi, "Value_iteration", "State, s", r"$V(s)$", \
+                           r"Gridworld, $V^{*}(s)$, " + title, 'r', filepath)
+
+# Optimum policy plot
+filepath = "figures/gridworld/vi_opt_policy.png"
+plotter.plot_q_vs_episodes(P_star_vi, "Value_iteration", "State, s", "$\pi(s)$", \
+                           r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
 
 # Plot policy and trajectory
 plt.figure(figsize = (10, 8))
@@ -99,19 +121,21 @@ V_sarsa           = algorithms.TD0(env, P_star_sarsa, alpha, gamma, total_eps)
 title             = r"$\epsilon = \frac{1}{t}$, " + r"$\alpha = {}, \gamma = {}$".format(alpha, gamma)
 
 # Learning curve plot (Average Qmax)
-plotter.plot_q_vs_episodes(Ql_sarsa, "SARSA", "No. of episodes", "Average $Q_{max}$", "Gridworld, " + title, 'r')
-plt.savefig("figures/gridworld/SARSA_learning_curve.png", dpi=400)
+filepath = "figures/gridworld/SARSA_learning_curve.png"
+plotter.plot_q_vs_episodes(Ql_sarsa, "SARSA", "No. of episodes", "Average $Q_{max}$", "Gridworld, " + title, 'r', filepath)
 
 # Learning curve plot (Return)
-plotter.plot_q_vs_episodes(Gl_sarsa, "SARSA", "No. of episodes", "Returns $G$", "Gridworld, " + title, 'r')
-plt.savefig("figures/gridworld/SARSA_learning_curve_g.png", dpi=400)
+filepath = "figures/gridworld/SARSA_learning_curve_g.png"
+plotter.plot_q_vs_episodes(Gl_sarsa, "SARSA", "No. of episodes", "Returns $G$", "Gridworld, " + title, 'r', filepath)
 
 # State value function plot
-plotter.plot_q_vs_episodes(V_sarsa, "SARSA", "State, s", r"$V(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r')
-plt.savefig("figures/gridworld/SARSA_state_value.png", dpi=400)
+filepath = "figures/gridworld/SARSA_state_value.png"
+plotter.plot_q_vs_episodes(V_sarsa, "SARSA", "State, s", r"$V(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r', filepath)
+
 # Policy plot
-plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r')
-plt.savefig("figures/gridworld/SARSA_policy.png", dpi=400)
+filepath = "figures/gridworld/SARSA_policy.png"
+plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
+
 
 
 # Plot policy and trajectory
@@ -154,7 +178,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/gridworld/grid_sarsa_epsilon.png", dpi=400)
+fig.savefig("figures/gridworld/grid_sarsa_epsilon.png", dpi=125)
 plt.show()
 
 
@@ -181,7 +205,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/gridworld/grid_sarsa_alpha.png", dpi=400)
+fig.savefig("figures/gridworld/grid_sarsa_alpha.png", dpi=125)
 plt.show()
 
 
@@ -197,19 +221,21 @@ V_qlearn          = algorithms.TD0(env, P_star_ql, alpha, gamma, total_eps)
 title             = r"$\epsilon = \frac{1}{t}$, " + r"$\alpha = {}, \gamma = {}$".format(alpha, gamma)
 
 #Learning curve plot
-plotter.plot_q_vs_episodes(Ql_qlearn, "Q-learning", "No. of episodes", "Average $Q_{max}$", "Gridworld, " + title, 'k')
-plt.savefig("figures/gridworld/ql_learning_curve.png", dpi=400)
+filepath = "figures/gridworld/ql_learning_curve.png"
+plotter.plot_q_vs_episodes(Ql_qlearn, "Q-learning", "No. of episodes", "Average $Q_{max}$", "Gridworld, " + title, 'k', filepath)
 
 #Learning curve g plot
-plotter.plot_q_vs_episodes(Gl_qlearn, "Q-learning", "No. of episodes", "Returns $G$", "Gridworld, " + title, 'k')
-plt.savefig("figures/gridworld/ql_learning_curve_g.png", dpi=400)
+filepath = "figures/gridworld/ql_learning_curve_g.png"
+plotter.plot_q_vs_episodes(Gl_qlearn, "Q-learning", "No. of episodes", "Returns $G$", "Gridworld, " + title, 'k', filepath)
 
 # State value function plot
-plotter.plot_q_vs_episodes(V_qlearn, "Q-learning", "State, s", r"$V(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r')
-plt.savefig("figures/gridworld/ql_state_value.png", dpi=400)
+filepath = "figures/gridworld/ql_state_value.png"
+plotter.plot_q_vs_episodes(V_qlearn, "Q-learning", "State, s", r"$V(s)$", r"Gridworld, $V^{*}(s)$, TD(0), " + title, 'r', filepath)
+
 # Policy plot
-plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r')
-plt.savefig("figures/gridworld/ql_policy.png", dpi=400)
+filepath = "figures/gridworld/ql_policy.png"
+plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi(s)$", r"Gridworld, $\pi^{*}$, " + title, 'r', filepath)
+
 
 # Plot policy and trajectory
 plt.figure(figsize = (10, 8))
@@ -251,7 +277,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/gridworld/grid_qlearning_epsilon.png", dpi=400)
+fig.savefig("figures/gridworld/grid_qlearning_epsilon.png", dpi=125)
 plt.show()
 
 
@@ -279,7 +305,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/gridworld/grid_qlearning_alpha.png", dpi=400)
+fig.savefig("figures/gridworld/grid_qlearning_alpha.png", dpi=125)
 plt.show()
 
 

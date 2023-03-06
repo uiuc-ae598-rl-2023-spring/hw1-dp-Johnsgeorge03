@@ -12,7 +12,7 @@ env        = discrete_pendulum.Pendulum(n_theta=21, n_thetadot=21, n_tau=21)
 s          = env.reset()
 gamma      = 0.95
 theta      = 1e-5
-total_eps  = 2000
+total_eps  = 5000
 alpha      = 0.5
 epsilon    = 1
 Ql_sarsa   = []
@@ -36,19 +36,21 @@ V_sarsa           = algorithms.TD0(env, P_star_sarsa, alpha, gamma, total_eps)
 title             = r"$\epsilon = \frac{1}{t}$, " + r"$\alpha = {}, \gamma = {}$".format(alpha, gamma)
 
 # Learning curve plot (Average Qmax)
-plotter.plot_q_vs_episodes(Ql_sarsa, "SARSA", "No. of episodes", "Average $Q_{max}$", "Pendulum, " + title, 'r')
-plt.savefig("figures/pendulum/SARSA_learning_curve.png", dpi=400)
+filename = "figures/pendulum/SARSA_learning_curve.png"
+plotter.plot_q_vs_episodes(Ql_sarsa, "SARSA", "No. of episodes", "Average $Q_{max}$", "Pendulum, " + title, 'r', filename)
 
 # Learning curve plot (Return)
-plotter.plot_q_vs_episodes(Gl_sarsa, "SARSA", "No. of episodes", "Returns $G$", "Pendulum, " + title, 'r')
-plt.savefig("figures/pendulum/SARSA_learning_curve_g.png", dpi=400)
+filename = "figures/pendulum/SARSA_learning_curve_g.png"
+plotter.plot_q_vs_episodes(Gl_sarsa, "SARSA", "No. of episodes", "Returns $G$", "Pendulum, " + title, 'r', filename)
 
 # State value function plot
-plotter.plot_q_vs_episodes(V_sarsa, "SARSA", "State, s", r"$V(s)$", r"Pendulum, $V^{*}(s)$, TD(0), " + title, 'r')
-plt.savefig("figures/pendulum/SARSA_state_value.png", dpi=400)
+filename = "figures/pendulum/SARSA_state_value.png"
+plotter.plot_q_vs_episodes(V_sarsa, "SARSA", "State, s", r"$V(s)$", r"Pendulum, $V^{*}(s)$, TD(0), " + title, 'r', filename)
+
 # Policy plot
-plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi(s)$", r"Pendulum, $\pi^{*}$, " + title, 'r')
-plt.savefig("figures/pendulum/SARSA_policy.png", dpi=400)
+filename = "figures/pendulum/SARSA_policy.png"
+plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi(s)$", r"Pendulum, $\pi^{*}$, " + title, 'r', filename)
+
 
 
 # Plot policy and trajectory
@@ -91,7 +93,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/pendulum/pendulum_sarsa_epsilon.png", dpi=400)
+fig.savefig("figures/pendulum/pendulum_sarsa_epsilon.png", dpi=125)
 plt.show()
 
 
@@ -118,7 +120,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/pendulum/pendulum_sarsa_alpha.png", dpi=400)
+fig.savefig("figures/pendulum/pendulum_sarsa_alpha.png", dpi=125)
 plt.show()
 
 
@@ -133,19 +135,20 @@ V_qlearn          = algorithms.TD0(env, P_star_ql, alpha, gamma, total_eps)
 title             = r"$\epsilon = \frac{1}{t}$, " + r"$\alpha = {}, \gamma = {}$".format(alpha, gamma)
 
 #Learning curve plot
-plotter.plot_q_vs_episodes(Ql_qlearn, "Q-learning", "No. of episodes", "Average $Q_{max}$", "Pendulum, " + title, 'k')
-plt.savefig("figures/pendulum/ql_learning_curve.png", dpi=400)
+filepath = "figures/pendulum/ql_learning_curve.png"
+plotter.plot_q_vs_episodes(Ql_qlearn, "Q-learning", "No. of episodes", "Average $Q_{max}$", "Pendulum, " + title, 'k', filepath)
 
 #Learning curve g plot
-plotter.plot_q_vs_episodes(Gl_qlearn, "Q-learning", "No. of episodes", "Returns $G$", "Pendulum, " + title, 'k')
-plt.savefig("figures/pendulum/ql_learning_curve_g.png", dpi=400)
+filepath = "figures/pendulum/ql_learning_curve_g.png"
+plotter.plot_q_vs_episodes(Gl_qlearn, "Q-learning", "No. of episodes", "Returns $G$", "Pendulum, " + title, 'k', filepath)
 
 # State value function plot
-plotter.plot_q_vs_episodes(V_qlearn, "Q-learning", "State, s", r"$V(s)$", r"Pendulum, $V^{*}(s)$, TD(0), " + title, 'r')
-plt.savefig("figures/pendulum/ql_state_value.png", dpi=400)
+filepath = "figures/pendulum/ql_state_value.png"
+plotter.plot_q_vs_episodes(V_qlearn, "Q-learning", "State, s", r"$V(s)$", r"Pendulum, $V^{*}(s)$, TD(0), " + title, 'r', filepath)
+
 # Policy plot
-plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi(s)$", r"Pendulum, $\pi^{*}$, " + title, 'r')
-plt.savefig("figures/pendulum/ql_policy.png", dpi=400)
+filepath = "figures/pendulum/ql_policy.png"
+plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi(s)$", r"Pendulum, $\pi^{*}$, " + title, 'r', filepath)
 
 # Plot policy and trajectory
 plt.figure(figsize = (10, 8))
@@ -187,7 +190,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/pendulum/pendulum_qlearning_epsilon.png", dpi=400)
+fig.savefig("figures/pendulum/pendulum_qlearning_epsilon.png", dpi=125)
 plt.show()
 
 
@@ -215,7 +218,7 @@ ax2.grid(True)
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("figures/pendulum/pendulum_qlearning_alpha.png", dpi=400)
+fig.savefig("figures/pendulum/pendulum_qlearning_alpha.png", dpi=125)
 plt.show()
 
 
