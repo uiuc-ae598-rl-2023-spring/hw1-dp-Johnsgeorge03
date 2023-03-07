@@ -29,7 +29,7 @@ def plot_val_q_vs_episodes(Q_list, value, val_name, ax):
     ax.plot(eps, Q_list, label = val_name + "{}".format(value))
     
     
-def plot_trajectory(env, policy):
+def plot_trajectory(env, policy, pendulum):
     
     # Simulate until episode is done
     s     = env.reset()
@@ -40,11 +40,35 @@ def plot_trajectory(env, policy):
         'a': [],
         'r': [],
     }
-    while not done:
-        a            = policy[s]
-        (s, r, done) = env.step(a)
-        log['t'].append(log['t'][-1] + 1)
-        log['s'].append(s)
-        log['a'].append(a)
-        log['r'].append(r)
+    if pendulum:
+        log = {
+            't': [0],
+            's': [s],
+            'a': [],
+            'r': [],
+            'theta': [env.x[0]],
+            'thetadot': [env.x[1]]
+        }
+        
+    if pendulum:
+        while not done:
+            a            = policy[s]
+            (s, r, done) = env.step(a)
+            log['t'].append(log['t'][-1] + 1)
+            log['s'].append(s)
+            log['a'].append(a)
+            log['r'].append(r)
+            log['theta'].append(env.x[0])
+            log['thetadot'].append(env.x[1])
+        
+    else:
+        
+        while not done:
+            a            = policy[s]
+            (s, r, done) = env.step(a)
+            log['t'].append(log['t'][-1] + 1)
+            log['s'].append(s)
+            log['a'].append(a)
+            log['r'].append(r)
+            
     return log

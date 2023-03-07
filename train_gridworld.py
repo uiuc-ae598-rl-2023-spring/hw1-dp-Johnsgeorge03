@@ -19,7 +19,7 @@ title    = r"$\gamma = {}$".format(gamma)
 ##########################
 #      MODEL_BASED       #
 ##########################
-
+pendulum = False
 
 
 ##########################
@@ -47,7 +47,7 @@ plotter.plot_q_vs_episodes(P_star_pi, "Policy_iteration", "State, s", "$\pi^{*}(
 
 # Plot policy and trajectory
 plt.figure(figsize = (10, 8))
-log = plotter.plot_trajectory(env, P_star_pi)
+log = plotter.plot_trajectory(env, P_star_pi, pendulum)
 plt.plot(log['t'], log['s'], '-o')
 plt.plot(log['t'][:-1], log['a'])
 plt.plot(log['t'][:-1], log['r'])
@@ -80,7 +80,7 @@ plotter.plot_q_vs_episodes(P_star_vi, "Value_iteration", "State, s", "$\pi^{*}(s
 
 # Plot policy and trajectory
 plt.figure(figsize = (10, 8))
-log = plotter.plot_trajectory(env, P_star_pi)
+log = plotter.plot_trajectory(env, P_star_pi, pendulum)
 plt.plot(log['t'], log['s'], '-o')
 plt.plot(log['t'][:-1], log['a'])
 plt.plot(log['t'][:-1], log['r'])
@@ -106,7 +106,7 @@ Ql_qlearn  = []
 Gl_qlearn  = []
 eps_list   = [0, 0.2, 0.4, 0.6, 0.8, 1]
 alpha_list = [0.2, 0.4, 0.5, 0.6, 0.8, 1]
-
+#model_free = True
 
 ##########################
 #         SARSA          #
@@ -140,7 +140,7 @@ plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi^{*}(s)$", r"
 
 # Plot policy and trajectory
 plt.figure(figsize = (10, 8))
-log = plotter.plot_trajectory(env, P_star_sarsa)
+log = plotter.plot_trajectory(env, P_star_sarsa, pendulum)
 plt.plot(log['t'], log['s'], '-o')
 plt.plot(log['t'][:-1], log['a'])
 plt.plot(log['t'][:-1], log['r'])
@@ -239,7 +239,7 @@ plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi^{*}(s)$", 
 
 # Plot policy and trajectory
 plt.figure(figsize = (10, 8))
-log = plotter.plot_trajectory(env, P_star_ql)
+log = plotter.plot_trajectory(env, P_star_ql, pendulum)
 plt.plot(log['t'], log['s'], '-o')
 plt.plot(log['t'][:-1], log['a'])
 plt.plot(log['t'][:-1], log['r'])

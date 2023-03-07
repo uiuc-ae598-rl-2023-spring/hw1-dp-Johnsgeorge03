@@ -21,7 +21,7 @@ Ql_qlearn  = []
 Gl_qlearn  = []
 eps_list   = [0, 0.2, 0.4, 0.6, 0.8, 1]
 alpha_list = [0.2, 0.4, 0.5, 0.6, 0.8, 1]
-
+pendulum   = True
 
 ##########################
 #         SARSA          #
@@ -54,15 +54,23 @@ plotter.plot_q_vs_episodes(P_star_sarsa, "SARSA", "State, s", "$\pi(s)$", r"Pend
 
 
 # Plot policy and trajectory
-plt.figure(figsize = (10, 8))
-log = plotter.plot_trajectory(env, P_star_sarsa)
-plt.plot(log['t'], log['s'], '-o')
-plt.plot(log['t'][:-1], log['a'])
-plt.plot(log['t'][:-1], log['r'])
-plt.title("SARSA, Pendulum, "  + r"$\alpha = {}$, $\gamma = {}$".format(alpha, gamma), fontsize = 25)
-plt.grid()
-plt.legend(['s', 'a', 'r'])
-plt.savefig('figures/pendulum/pendulum_sarsa_policy_trajec.png')
+fig, ax = plt.subplots(2, 1, figsize=(10, 10))
+fig.suptitle("SARSA, Pendulum, "  + r"$\alpha = {}$, $\gamma = {}$".format(alpha, gamma), fontsize = 25)
+log = plotter.plot_trajectory(env, P_star_sarsa, pendulum)
+ax[0].plot(log['t'], log['s'])
+ax[0].plot(log['t'][:-1], log['a'])
+ax[0].plot(log['t'][:-1], log['r'])
+ax[0].grid(True)
+ax[0].legend(['s', 'a', 'r'])
+
+ax[1].plot(log['t'], log['theta'])
+ax[1].plot(log['t'], log['thetadot'])
+ax[1].grid(True)
+ax[1].legend(['theta', 'thetadot'])
+
+fig.tight_layout()
+fig.savefig('figures/pendulum/pendulum_sarsa_policy_trajectory.png')
+plt.show()
 
 # Epsilon plots
 val_name   = r"$\epsilon = $"
@@ -151,15 +159,23 @@ filepath = "figures/pendulum/ql_policy.png"
 plotter.plot_q_vs_episodes(P_star_ql, "Q-learning", "State, s", "$\pi(s)$", r"Pendulum, $\pi^{*}$, " + title, 'r', filepath)
 
 # Plot policy and trajectory
-plt.figure(figsize = (10, 8))
-log = plotter.plot_trajectory(env, P_star_ql)
-plt.plot(log['t'], log['s'], '-o')
-plt.plot(log['t'][:-1], log['a'])
-plt.plot(log['t'][:-1], log['r'])
-plt.title("Q-Learning, Pendulum, "  + r"$\alpha = {}$, $\gamma = {}$".format(alpha, gamma), fontsize = 20)
-plt.grid()
-plt.legend(['s', 'a', 'r'])
-plt.savefig('figures/pendulum/pendulum_qlearning_policy_trajectory.png')
+fig, ax = plt.subplots(2, 1, figsize=(10, 10))
+fig.suptitle("Q-Learning, Pendulum, "  + r"$\alpha = {}$, $\gamma = {}$".format(alpha, gamma), fontsize = 25)
+log = plotter.plot_trajectory(env, P_star_ql, pendulum)
+ax[0].plot(log['t'], log['s'])
+ax[0].plot(log['t'][:-1], log['a'])
+ax[0].plot(log['t'][:-1], log['r'])
+ax[0].grid(True)
+ax[0].legend(['s', 'a', 'r'])
+
+ax[1].plot(log['t'], log['theta'])
+ax[1].plot(log['t'], log['thetadot'])
+ax[1].grid(True)
+ax[1].legend(['theta', 'thetadot'])
+
+fig.tight_layout()
+fig.savefig('figures/pendulum/pendulum_qlearning_policy_trajectory.png')
+plt.show()
 
 # Epsilon plots
 val_name   = r"$\epsilon = $"
